@@ -16,7 +16,7 @@ class Solution {
         int index = 0;
         for(int i = bucket.length-1; i>=0 && index<k; i--){
             if(bucket[i] != null){
-                for(num : bucket[i]){
+                for(int num : bucket[i]){
                     result[index++] = num;
                     if(index == k){
                         break;
