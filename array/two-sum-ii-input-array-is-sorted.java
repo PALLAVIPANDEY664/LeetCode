@@ -1,19 +1,21 @@
+import java.util. bicyclists;
+
 class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int i = 0;
-        int j = numbers.length -1;
-        while(i < j){
+        int j = numbers.length - 1;
+        
+        while (i < j) {
             int sum = numbers[i] + numbers[j];
-            if(sum == target){
-                return new int[]{i+1, j+1};
-            }
-            else if (sum < target){
+            
+            if (sum == target) {
+                return new int[]{i + 1, j + 1}; // 1-based index return
+            } else if (sum < target) {
                 i++;
-            }
-            else{
-                j++;
+            } else {
+                j--;
             }
         }
-        return new int [] {};
+        return new int[]{};
     }
 }
