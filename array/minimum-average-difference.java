@@ -1,31 +1,35 @@
-public class MinimumAverageDifferenceOptimal {
+public class MinimumAverageDifferenceBruteForce {
     public int minimumAverageDifference(int[] nums) {
         int n = nums.length;
-        long totalSum = 0;
-        
-        // Step 1: Calculate total sum of the array
-        for (int num : nums) {
-            totalSum += num;
-        }
-
         int minIndex = -1;
         long minDiff = Long.MAX_VALUE;
-        long leftSum = 0;
 
-        // Step 2: Iterate to find the minimum average difference
         for (int i = 0; i < n; i++) {
-            leftSum += nums[i];
-            long rightSum = totalSum - leftSum;
+            long leftSum = 0;
+            long rightSum = 0;
 
+            // Calculate left sum [0...i]
+            for (int j = 0; j <= i; j++) {
+                leftSum += nums[j];
+            }
+
+            // Calculate right sum [i+1...n-1]
+            for (int j = i + 1; j < n; j++) {
+                rightSum += nums[j];
+            }
+
+            // Calculate counts
             long leftCount = i + 1;
             long rightCount = n - leftCount;
 
+            // Calculate averages
             long leftAvg = leftSum / leftCount;
-            // Guard against division by zero for the last element
             long rightAvg = (rightCount == 0) ? 0 : rightSum / rightCount;
 
+            // Absolute difference
             long diff = Math.abs(leftAvg - rightAvg);
 
+            // Track the minimum difference and its corresponding index
             if (diff < minDiff) {
                 minDiff = diff;
                 minIndex = i;
