@@ -1,63 +1,51 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
 class Solution {
-
     public boolean isPalindrome(ListNode head) {
 
-        // 1. Find the middle
-        ListNode fast = head;
+        if (head == null || head.next == null)
+            return true;
+
+        // Find middle
         ListNode slow = head;
+        ListNode fast = head;
 
         while (fast != null && fast.next != null) {
-            fast = fast.next.next;
             slow = slow.next;
+            fast = fast.next.next;
         }
 
-        // For even number of nodes
+        // For odd length, skip middle node
         if (fast != null) {
             slow = slow.next;
         }
 
-        // 2. Reverse the second half
-        slow = reverseList(slow);
+        // Reverse second half
+        ListNode secondHalf = reverse(slow);
 
-        // 3. Compare first half and reversed second half
-        fast = head;
+        // Compare
+        ListNode firstHalf = head;
 
-        while (slow != null) {
-
-            if (fast.val != slow.val) {
+        while (secondHalf != null) {
+            if (firstHalf.val != secondHalf.val)
                 return false;
-            }
 
-            fast = fast.next;
-            slow = slow.next;
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
         }
 
         return true;
     }
 
-    private ListNode reverseList(ListNode head) {
+    private ListNode reverse(ListNode head) {
 
         ListNode prev = null;
-        ListNode current = head;
+        ListNode curr = head;
 
-        while (current != null) {
+        while (curr != null) {
+            ListNode next = curr.next;
 
-            ListNode next = current.next;
-
-            current.next = prev;
-
-            prev = current;
-            current = next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
 
         return prev;
