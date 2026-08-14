@@ -15,22 +15,20 @@ class Solution {
     public Solution(ListNode head) {
         this.head = head;
         this.random = new Random();
+        
     }
-
+    
     public int getRandom() {
         ListNode curr = head;
         int answer = curr.val;
         int i = 1;
-
-        while (curr != null) {
-            if (random.nextInt(i) == 0) {
+        while(curr != null){
+            if(random.nextInt(i) == 0){
                 answer = curr.val;
             }
-
             curr = curr.next;
             i++;
         }
-
         return answer;
     }
 }
