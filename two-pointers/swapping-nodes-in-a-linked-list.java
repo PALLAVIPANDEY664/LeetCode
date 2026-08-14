@@ -9,33 +9,24 @@
  * }
  */
 class Solution {
-    private int findLength(ListNode head){
-        int length = 0;
+    public ListNode swapNodes(ListNode head, int k) {
+        ListNode p1 = null;
+        ListNode p2 = null;
         ListNode temp = head;
         while(temp != null){
-            length++;
+            if(p2 != null){
+                p2 = p2.next;
+            }
+            k--;
+            if(k == 0){
+                p1 = temp;
+                p2 = head;
+            }
             temp = temp.next;
         }
-        return length;
-    }
-    public ListNode swapNodes(ListNode head, int k) {
-        int L = findLength(head);
-        int k1 = k;
-        ListNode node1 = head;
-        while(k1 > 1){
-            node1 = node1.next;
-            k1--;
-        }
-
-        int k2 = L-k+1;
-        ListNode node2 = head;
-        while(k2 > 1){
-            node2 = node2.next;
-            k2--;
-        }
-        int tempVal = node1.val;
-        node1.val = node2.val;
-        node2.val = tempVal;
+        int tempVal = p1.val;
+        p1.val = p2.val;
+        p2.val = tempVal;
         return head;
     }
 }
