@@ -1,24 +1,22 @@
 class Solution {
     public int maxRotateFunction(int[] nums) {
-        int n = nums.length;
-        int sum = 0;
-        int f0 = 0;
+        long n = nums.length;
+        long sum = 0;
+        long f0 = 0;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
-            f0 += i * nums[i];
+            f0 += (long) i * nums[i];
         }
 
-        int maxF = f0;
-        int currentF = f0;
+        long maxF = f0;
+        long currentF = f0;
 
-        // Calculate F(k) using the transition state relation:
-        // F(k) = F(k - 1) + sum - n * nums[n - k]
-        for (int i = 1; i < n; i++) {
-            currentF = currentF + sum - n * nums[n - i];
+        for (int i = 1; i < nums.length; i++) {
+            currentF = currentF + sum - n * nums[nums.length - i];
             maxF = Math.max(maxF, currentF);
         }
 
-        return maxF;
+        return (int) maxF;
     }
 }
